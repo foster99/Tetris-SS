@@ -5,7 +5,6 @@ class Board {
     position = new Coord(x,y);
     score = 0;
     lines = 0;
-    highestOccupied = altura-1;
     for (int i = 0; i < altura; ++i) {
       for (int j = 0; j < anchura; ++j) cells[i][j] = new Cell(i,j);
     }
@@ -65,7 +64,6 @@ class Board {
     /*Obtain current piece position array 4 positions
       Check if current piece lands on an occupied cell
       If true 
-        updateHighestOccupied if necessary
         occupieCells
         If line completed
           Calculate score, update lines cleared and clear lines
@@ -86,12 +84,14 @@ class Board {
     }
     else {
       for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
+      show();
       for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].clearOccupied();
     }
     
   }
   
   private void calculateScore(int full) {
+    score++;
   }
  
   private boolean landed(Coord[] positions) {
@@ -104,7 +104,7 @@ class Board {
   
   private int fullRows() {
     int full = 0;
-    for (int i = highestOccupied; i >= 0; --i) {
+    for (int i = 4; i < altura; --i) {
       boolean occupied = true;
       for (int j = 0; j < anchura && occupied; ++j) {
         if (!cells[i][j].isOccupied()) occupied = false;
@@ -114,14 +114,12 @@ class Board {
         ++lines;
         for (int j = 0; j < anchura; ++j) cells[i][j].clearOccupied();
         //Push down all the upper cells
-        for (int ii = i; ii > highestOccupied; --ii) {
+        for (int ii = i; ii > 0; --ii) {
           for (int j = 0; j < anchura; ++j) {
-            //cells[ii][j].replace(cells[ii-1][j]);
-            //cells[ii][j] = cells[ii+1][j];
-            //cell copy
+            cells[ii][j].replace(cells[ii-1][j]);
           }
         }
-        for (int j = 0; j < anchura; ++j) cells[highestOccupied][j].clearOccupied();
+        for (int j = 0; j < anchura; ++j) cells[0][j].clearOccupied();
       }
     }
     return full;
@@ -167,5 +165,4 @@ class Board {
   private Piece current_piece;
   //Next piece in the game
   private Piece next_piece;
-  private int highestOccupied;
 }
