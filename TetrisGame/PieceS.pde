@@ -27,17 +27,17 @@ public class PieceS extends Piece {
     rotation = (++rotation)%2;
     switch (rotation) {
       case 0:
-        portions[0].setCoord(1,0);
-        portions[1].setCoord(1,1);
-        portions[2].setCoord(0,1);
-        portions[3].setCoord(0,2);
+        portions[0] = new Coord(1,0);
+        portions[1] = new Coord(1,1);
+        portions[2] = new Coord(0,1);
+        portions[3] = new Coord(0,2);
         break;
         
       case 1:
-        portions[0].setCoord(0,0);
-        portions[1].setCoord(1,0);
-        portions[2].setCoord(1,1);
-        portions[3].setCoord(2,1);
+        portions[0] = new Coord(0,0);
+        portions[1] = new Coord(1,0);
+        portions[2] = new Coord(1,1);
+        portions[3] = new Coord(2,1);
         break;
         
       default: break;
