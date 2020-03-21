@@ -22,22 +22,22 @@ class Board {
         p = new PieceL(o);
         break;
       case 1:
-        p = new PieceO(o);
+        p = new PieceJ(o);
         break;
       case 2:
-        p = new PieceT(o);
+        p = new PieceO(o);
         break;
       case 3:
-        p = new PieceL(o);
+        p = new PieceS(o);
         break;
       case 4:
-        p = new PieceL(o);
+        p = new PieceZ(o);
         break;
       case 5:
-        p = new PieceL(o);
+        p = new PieceT(o);
         break;
       case 6:
-        p = new PieceL(o);
+        p = new PieceI(o);
         break;
       default:
         throw new java.lang.IllegalArgumentException();
@@ -91,7 +91,8 @@ class Board {
     
   }
   
-  private calculateScore(int full)
+  private void calculateScore(int full) {
+  }
  
   private boolean landed(Coord[] positions) {
     for (int i = 0; i < 4; ++i) {
