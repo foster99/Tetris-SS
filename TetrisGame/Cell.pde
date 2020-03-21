@@ -1,5 +1,5 @@
 class Cell {
-  private static final int size= 40;
+  private static final int size= 30;
  
   private boolean Occupied;
   private Coord cord;
@@ -48,7 +48,7 @@ class Cell {
   
   void show(Coord C) {
     fill(color(col[0],col[1],col[2]));
-    rect(cord.x*20+C.x,cord.y*20+C.y,size,size);
+    rect(cord.x*size+C.x,cord.y*size+C.y,size,size);
   }
   
 }

@@ -3,10 +3,9 @@ Board B;
 Cell C;
 Coord aux;
 boolean gameRunning = true;
-int tick = 0;
 // Funcion que se ejecuta al inicio una sola vez
 void setup() {
-  size(400,800);
+  size(600,600);
   background(color(255, 255, 255));
   
   C= new Cell(1,1);
@@ -22,16 +21,11 @@ void setup() {
 
 // Funcion en bucle para pintar
 void draw() {
-  ++tick;
   // Crida a fer coses
-  
-  
   if (gameRunning) {
-    if (tick%30 == 0)
-      B.current_piece.movePiece("DOWN");
     background(color(255, 255, 255));
     gameRunning = B.game();
-    //C.show(aux);
+    C.show(aux);
     aux.x += 1;
     aux.y += 1;
   }
