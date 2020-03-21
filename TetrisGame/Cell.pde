@@ -9,18 +9,21 @@ class Cell {
     Occupied=false;
     cord= new Coord(x,y);
     col= new int[3];
+    setColor(255,255,255);
   }
   
   public boolean isOccupied(){
     return Occupied;
   }
   
-  public void setOccupied(){
+  public void setOccupied(int R, int G, int B){
     Occupied=true;
+    setColor(R,G,B);
   }
   
   public void clearOccupied(){
     Occupied=false;
+    setColor(255,255,255);
   }
   
   public Coord getCoord(){
@@ -31,6 +34,11 @@ class Cell {
     col[0]=R;
     col[1]=G;
     col[2]=B;
+  }
+  
+  public void replace(boolean Oc, int R, int G, int B){
+    Occupied=Oc;
+    setColor(R,G,B);   
   }
   
   void show(Coord C) {

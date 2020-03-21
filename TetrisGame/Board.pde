@@ -1,3 +1,5 @@
+import java.util.*; 
+
 class Board {
   public Board(int x, int y) {
     position = new Coord(x,y);
@@ -23,12 +25,46 @@ class Board {
     if (x < 0 || x >= width) throw new java.lang.IllegalArgumentException();
     else if (y < 0 || y >= length) throw new java.lang.IllegalArgumentException();
     return cells[x][y].isOccupied();
+  
+  
+  public void game() {
+    /*Obtain current piece position array 4 positions
+      Check if current piece lands on an occupied cell
+      If true 
+        occupieCells
+        If line completed
+          Calculate score, update lines cleared and clear lines
+        If 4 first rows are occupied:
+          gameOver();
+        show()
+      else 
+        occupieCells
+        show()
+        unoccupieCells
+      
+    */
   }
   
-  public void show() {
+  private int fullRows(int[] possibleRows) {
+    int full = 0;
+    for (int i in possibleRows) {
+      boolean occupied = true;
+      for (int j = 0; j < width && occupied; ++j) {
+        if (!cells[i][j].isOccupied) occupied = false;
+      }
+      if (occupied == true) {
+        ++full;
+        ++lines;
+        for (int j = 0; j < width; ++j) cells[i][j].clearOccupied();
+      }
+    }
+    return full;
+  }
+  
+  private void show() {
     for (int i = 0; i < length; ++i) {
        for (int j = 0; j < length; ++j) {
-         /*cells[i][j].show(position);*/
+         cells[i][j].show(position);
        }
     }
   }

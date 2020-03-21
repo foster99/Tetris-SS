@@ -1,27 +1,31 @@
 // Variables globales
-
+Board B;
+Cell C;
+Coord aux;
 // Funcion que se ejecuta al inicio una sola vez
 void setup() {
   size(600,600);
-  background(color(500, 100, 100));
- /* 
-  int margin = 10;
-  fill(color(200, 200, 255));
-  rect(margin,margin, width - 2*margin, height - 2*margin);
-  line(margin,margin,500,500);
-  */
+  background(color(255, 255, 255));
   
+  C= new Cell(1,1);
+  B= new Board(0,0);
+  aux= new Coord(0,0);
+  /*
   Cell c= new Cell(450,450);
   c.setColor(0,0,255);
   Coord f= new Coord(0,0);
   c.show(f);
+  */
 }
-
 
 // Funcion en bucle para pintar
 void draw() {
-  /* for all tablero -> tablero.show
-  */
+  // Crida a fer coses
+  //B.game();
+  background(color(255, 255, 255));
+  C.show(aux);
+  aux.x += 1;
+  aux.y += 1;
 }
 
 // Funcion que se ejecuta cuando se presiona una tecla
