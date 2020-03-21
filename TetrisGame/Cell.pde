@@ -36,6 +36,11 @@ class Cell {
     col[2]=B;
   }
   
+  public void replace(boolean Oc, int R, int G, int B){
+    Occupied=Oc;
+    setColor(R,G,B);   
+  }
+  
   void show(Coord C) {
     fill(color(col[0],col[1],col[2]));
     rect(cord.x+C.x,cord.y+C.y,size,size);
