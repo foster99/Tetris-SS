@@ -84,7 +84,7 @@ class Board {
   }
   
   private void calculateScore(int full) {
-    score++;
+    score += full;
   }
  
   private boolean landed(Coord[] positions) {
@@ -120,7 +120,7 @@ class Board {
   
   private void show() {
     for (int i = 0; i < altura; ++i) {
-       for (int j = 0; j < altura; ++j) {
+       for (int j = 0; j < anchura; ++j) {
          cells[i][j].show(position);
        }
     }
