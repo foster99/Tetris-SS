@@ -1,12 +1,12 @@
 
-// Pieza L:    |x|x| | |
+// Pieza O:    |x|x| | |
 //             |x|x| | |
 //             | | | | |
 //             | | | | |
 
-public class PieceL extends Piece {
+public class PieceO extends Piece {
  
-  PieceT(Coord o) {
+  PieceO(Coord o) {
     super();
     origin = o;
     rotation = 0;

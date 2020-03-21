@@ -6,10 +6,10 @@
 
 public class PieceL extends Piece {
  
-  PieceT(Coord o) {
+  PieceL(Coord o) {
     super();
     origin = o;
-    rotation = floor(random(0,3));
+    rotation = floor(random(0,4));
   }
   
   int[] getColor() {

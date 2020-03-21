@@ -9,7 +9,7 @@ public class PieceT extends Piece {
   PieceT(Coord o) {
     super();
     origin = o;
-    rotation = floor(random(0,3));
+    rotation = floor(random(0,4));
   }
   
   int[] getColor() {

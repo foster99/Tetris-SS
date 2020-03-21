@@ -6,14 +6,14 @@
 
 public class PieceJ extends Piece {
  
-  PieceT(Coord o) {
+  PieceJ(Coord o) {
     super();
     origin = o;
     rotation = floor(random(0,4));
   }
   
   int[] getColor() {
-    return new int[] {166,0,255};
+    return new int[] {0,0,255};  // blue
   }
   
   void rotatePiece() {

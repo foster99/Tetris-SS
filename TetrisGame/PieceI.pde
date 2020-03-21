@@ -4,16 +4,16 @@
 //             |x| | | |
 //             |x| | | |
 
-public class PieceJ extends Piece {
+public class PieceI extends Piece {
  
-  PieceT(Coord o) {
+  PieceI(Coord o) {
     super();
     origin = o;
     rotation = floor(random(0,2));
   }
   
   int[] getColor() {
-    return new int[] {166,0,255};
+    return new int[] {0,247,255}; // cyan
   }
   
   void rotatePiece() {
