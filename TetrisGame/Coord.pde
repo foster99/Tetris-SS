@@ -1,37 +1,49 @@
 // Coordeanadas 2D
 public class Coord {
     
-    public int x;
-    public int y;
+    public int i;
+    public int j;
     
     public Coord() {
-      x = 0;
-      y = 0;
+      i = 0;
+      j = 0;
     }
 
-    public Coord(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Coord(int i, int j) {
+        this.i = i;
+        this.j = j;
     }
     
-    public void setCoord(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void setCoord(int i, int j) {
+        this.i = i;
+        this.j = j;
     }
     
-    public void sum(int dx, int dy) {
-      x += dx;
-      y += dy;
+    public void sum(int di, int dj) {
+      i += di;
+      j += dj;
     }
     
     public void sum(Coord a) {
-      x += a.x;
-      y += a.y;
+      i += a.i;
+      j += a.j;
+    }
+    
+    public Coord clone() {
+      return new Coord(this.i, this.j); 
+    }
+    
+    public Coord swap() {
+      int aui = i;
+      i = j;
+      j = aui;
+      
+      return this;
     }
     
     public Coord getNewSum(Coord a) {
       
-      return new Coord(this.x + a.x, this.y + a.y);
+      return new Coord(this.i + a.i, this.j + a.j);
     }
     
 }

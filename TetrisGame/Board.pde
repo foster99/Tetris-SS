@@ -59,28 +59,53 @@ class Board {
   
   public void move(String direction) {
     if (direction == "UP") current_piece.rotatePiece();
-    current_piece.movePiece(direction);
+    current_piece.movePiece(direction, anchura, altura);
   }
   
   public boolean game() {
     Coord[] positions = current_piece.getCoords();
     int[] colors = current_piece.getColor();
+    
+    Coord aux;
+    
     if (landed(positions)) {
-      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
+      
+      for (int i = 0; i < 4; ++i) {
+        aux = positions[i].clone();
+        if (aux.i < anchura && aux.j < altura) 
+          cells[aux.i][aux.j].setOccupied(colors[0],colors[1],colors[2]);
+      }
+      
       int full = fullRows();
       calculateScore(full);
+      
       show();
+      
       for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < anchura; ++j) {
           if (cells[i][j].isOccupied()) return false;
         }
       }
+      
     }
     else {
-      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
+      // game 66
+      
+      for (int i = 0; i < 4; ++i) {
+        aux = positions[i].clone();
+        if (aux.j < anchura && aux.i < altura) 
+          cells[aux.i][aux.j].setOccupied(colors[0],colors[1],colors[2]);
+      }
+      
       show();
-      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].clearOccupied();
+      
+      for (int i = 0; i < 4; ++i) {
+        aux = positions[i].clone();
+        if (aux.j < anchura && aux.i < altura) 
+          cells[aux.i][aux.j].clearOccupied();
+      }
     }
+    
     return true;
   }
   
@@ -90,8 +115,8 @@ class Board {
  
   private boolean landed(Coord[] positions) {
     for (int i = 0; i < 4; ++i) {
-      if (positions[i].y+1 == altura-1) return true;
-      else if (cells[positions[i].x][positions[i].y+1].isOccupied()) return true;
+      if (positions[i].j+1 == altura-1) return true;
+      else if (cells[positions[i].i+1][positions[i].j].isOccupied()) return true;
     }
     return false;
   }

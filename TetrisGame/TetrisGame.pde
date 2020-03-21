@@ -28,12 +28,12 @@ void draw() {
   
   if (gameRunning) {
     if (tick%30 == 0)
-      B.current_piece.movePiece("DOWN");
+      B.current_piece.movePiece("DOWN", Board.anchura, Board.altura);
     background(color(255, 255, 255));
     gameRunning = B.game();
     //C.show(aux);
-    aux.x += 1;
-    aux.y += 1;
+    aux.i += 1;
+    aux.j += 1;
   }
 }
 

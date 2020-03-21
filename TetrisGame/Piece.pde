@@ -8,12 +8,18 @@ public abstract class Piece {
   abstract int[] getColor();
   abstract void rotatePiece();
   
-  void movePiece(String dir) {
+  void movePiece(String dir, int maxi, int maxj) {
+    
     switch (dir) {
-      //case "UP": origin.sum(-1,0); break;
-      case "DOWN": origin.sum(1,0); break;
-      case "LEFT": origin.sum(0,-1); break;
-      case "RIGHT": origin.sum(0,1); break;
+      case "DOWN":
+        if (origin.j < maxj) origin.sum(1,0);
+        break;
+      case "LEFT":
+        if (origin.i > 0) origin.sum(0,-1);
+        break;
+      case "RIGHT":
+        if (origin.i < maxi) origin.sum(0,1);
+        break;
       default: break;
     }
   }
