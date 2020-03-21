@@ -19,7 +19,11 @@ class Board {
   }
   
   public void show() {
-    for (int i = 0; i < length)
+    for (int i = 0; i < length; ++i) {
+       for (int j = 0; j < length; ++j) {
+         //Show cells
+       }
+    }
   }
   //Position of the board (relative to the viewport)
   private Coord position;
