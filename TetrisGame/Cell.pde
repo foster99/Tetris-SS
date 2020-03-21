@@ -30,15 +30,20 @@ class Cell {
     return cord;
   }
   
+  public void getColor(){
+    return col;
+  }
+  
   public void setColor(int R, int G, int B){
     col[0]=R;
     col[1]=G;
     col[2]=B;
   }
   
-  public void replace(boolean Oc, int R, int G, int B){
-    Occupied=Oc;
-    setColor(R,G,B);   
+  public void replace(Cell og){
+    Occupied=og.isOccupied;
+    int[] aux= og.getColor();
+    setColor(aux[0],aux[1],aux[2]);   
   }
   
   void show(Coord C) {
