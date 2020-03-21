@@ -57,37 +57,30 @@ class Board {
   }
   
   public void move(String direction) {
+    if (direction == "UP") current_piece.rotatePiece();
     current_piece.movePiece(direction);
   }
   
-  public void game() {
-    /*Obtain current piece position array 4 positions
-      Check if current piece lands on an occupied cell
-      If true 
-        occupieCells
-        If line completed
-          Calculate score, update lines cleared and clear lines
-        If 4 first rows are occupied:
-          gameOver();
-        show()
-      else 
-        occupieCells
-        show()
-        unoccupieCells
-    */
+  public boolean game() {
     Coord[] positions = current_piece.getCoords();
     int[] colors = current_piece.getColor();
     if (landed(positions)) {
       for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
       int full = fullRows();
       calculateScore(full);
+      show();
+      for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < anchura; ++j) {
+          if (cells[i][j].isOccupied()) return false;
+        }
+      }
     }
     else {
       for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
       show();
       for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].clearOccupied();
     }
-    
+    return true;
   }
   
   private void calculateScore(int full) {

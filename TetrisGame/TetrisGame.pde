@@ -21,7 +21,7 @@ void setup() {
 // Funcion en bucle para pintar
 void draw() {
   // Crida a fer coses
-  //B.game();
+  B.game();
   background(color(255, 255, 255));
   C.show(aux);
   aux.x += 1;
