@@ -30,7 +30,7 @@ class Cell {
     return cord;
   }
   
-  public void getColor(){
+  public int[] getColor(){
     return col;
   }
   
@@ -41,7 +41,7 @@ class Cell {
   }
   
   public void replace(Cell og){
-    Occupied=og.isOccupied;
+    Occupied=og.isOccupied();
     int[] aux= og.getColor();
     setColor(aux[0],aux[1],aux[2]);   
   }

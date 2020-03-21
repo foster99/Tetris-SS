@@ -15,9 +15,9 @@ class Board {
   
   private Piece generatePiece() {
     Coord o = new Coord(width/2,4);
-    Random rand;
     Piece p;
-    int randomNum = rand.nextInt((6 - 0) + 1) + 0;
+    int randomNum = floor(random(0,7));
+
     switch (randomNum) {
       case 0:
         p = new PieceL(o);
