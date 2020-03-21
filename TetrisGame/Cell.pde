@@ -33,9 +33,9 @@ class Cell {
     col[2]=B;
   }
   
-  void show() {
+  void show(Coord C) {
     fill(color(col[0],col[1],col[2]));
-    rect(cord.x,cord.y,size,size);
+    rect(cord.x+C.x,cord.y+C.y,size,size);
   }
   
 }
