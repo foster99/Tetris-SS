@@ -1,5 +1,7 @@
 class Cell {
   
+  private
+  
   Cell() {
     
   }
