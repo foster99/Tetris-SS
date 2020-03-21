@@ -5,19 +5,18 @@ class Board {
     position = new Coord(x,y);
     score = 0;
     lines = 0;
-    highestOccupied = length-1;
-    for (int i = 0; i < length; ++i) {
-      for (int j = 0; j < width; ++j) cells[i][j] = new Cell(i,j);
+    highestOccupied = altura-1;
+    for (int i = 0; i < altura; ++i) {
+      for (int j = 0; j < anchura; ++j) cells[i][j] = new Cell(i,j);
     }
     current_piece = generatePiece();
     next_piece = generatePiece();
   }
   
   private Piece generatePiece() {
-    Coord o = new Coord(width/2,4);
-    Random rand;
+    Coord o = new Coord(anchura/2,4);
     Piece p;
-    int randomNum = rand.nextInt((6 - 0) + 1) + 0;
+    int randomNum = floor(random(0,7));
     switch (randomNum) {
       case 0:
         p = new PieceL(o);
@@ -53,8 +52,8 @@ class Board {
   
   /*Given a cell (x,y), check if it is occupied*/
   public boolean isOccupied(int x, int y) {
-    if (x < 0 || x >= width) throw new java.lang.IllegalArgumentException();
-    else if (y < 0 || y >= length) throw new java.lang.IllegalArgumentException();
+    if (x < 0 || x >= anchura) throw new java.lang.IllegalArgumentException();
+    else if (y < 0 || y >= altura) throw new java.lang.IllegalArgumentException();
     return cells[x][y].isOccupied();
   }
   
@@ -78,12 +77,25 @@ class Board {
         show()
         unoccupieCells
     */
+    Coord[] positions = current_piece.getCoords();
+    int[] colors = current_piece.getColor();
+    if (landed(positions)) {
+      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
+      int full = fullRows();
+      calculateScore(full);
+    }
+    else {
+      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
+      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].clearOccupied();
+    }
     
   }
   
+  private calculateScore(int full)
+ 
   private boolean landed(Coord[] positions) {
     for (int i = 0; i < 4; ++i) {
-      if (positions[i].y-1 == length-1) return true;
+      if (positions[i].y-1 == altura-1) return true;
       else if (cells[positions[i].x][positions[i].y-1].isOccupied()) return true;
     }
     return false;
@@ -93,30 +105,30 @@ class Board {
     int full = 0;
     for (int i = highestOccupied; i >= 0; --i) {
       boolean occupied = true;
-      for (int j = 0; j < width && occupied; ++j) {
+      for (int j = 0; j < anchura && occupied; ++j) {
         if (!cells[i][j].isOccupied()) occupied = false;
       }
       if (occupied == true) {
         ++full;
         ++lines;
-        for (int j = 0; j < width; ++j) cells[i][j].clearOccupied();
+        for (int j = 0; j < anchura; ++j) cells[i][j].clearOccupied();
         //Push down all the upper cells
         for (int ii = i; ii > highestOccupied; --ii) {
-          for (int j = 0; j < width; ++j) {
+          for (int j = 0; j < anchura; ++j) {
             //cells[ii][j].replace(cells[ii-1][j]);
             //cells[ii][j] = cells[ii+1][j];
             //cell copy
           }
         }
-        for (int j = 0; j < width; ++j) cells[highestOccupied][j].clearOccupied();
+        for (int j = 0; j < anchura; ++j) cells[highestOccupied][j].clearOccupied();
       }
     }
     return full;
   }
   
   private void show() {
-    for (int i = 0; i < length; ++i) {
-       for (int j = 0; j < length; ++j) {
+    for (int i = 0; i < altura; ++i) {
+       for (int j = 0; j < altura; ++j) {
          cells[i][j].show(position);
        }
     }
@@ -141,11 +153,11 @@ class Board {
   //Position of the board (relative to the viewport)
   private Coord position;
   //Matrix of the cells of the board
-  private Cell[][] cells = new Cell[length][width];
-  //Width of the board
-  private static final int width = 10;
+  private Cell[][] cells = new Cell[altura][anchura];
+  //altura of the board
+  private static final int anchura = 10;
   //Length of the board, the first 4 rows are reserved.
-  private static final int length = 20+4; 
+  private static final int altura = 20+4; 
   //Points obtained in the board
   private int score;
   //Lines cleared in the board
