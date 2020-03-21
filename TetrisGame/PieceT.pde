@@ -13,7 +13,7 @@ public class PieceT extends Piece {
   }
   
   int[] getColor() {
-    return new int[] {166,0,255};
+    return new int[] {166,0,255}; // purple
   }
   
   void rotatePiece() {
