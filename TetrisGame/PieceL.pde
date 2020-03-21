@@ -1,7 +1,7 @@
 
-// Pieza T:    |x|x|x| |
-//             | |x| | |
-//             | | | | |
+// Pieza T:    |x| | | |
+//             |x| | | |
+//             |x|x| | |
 //             | | | | |
 
 public class PieceT extends Piece {
