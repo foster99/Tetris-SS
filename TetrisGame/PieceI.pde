@@ -1,5 +1,5 @@
 
-// Pieza J:    |x| | | |
+// Pieza I:    |x| | | |
 //             |x| | | |
 //             |x| | | |
 //             |x| | | |
@@ -10,6 +10,8 @@ public class PieceI extends Piece {
     super();
     origin = o;
     rotation = floor(random(0,2));
+    portions = new Coord[4];
+    rotatePiece();
   }
   
   int[] getColor() {

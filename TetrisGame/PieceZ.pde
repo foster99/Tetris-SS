@@ -9,6 +9,8 @@ public class PieceZ extends Piece {
     super();
     origin = o;
     rotation = floor(random(0,1));
+    portions = new Coord[4];
+    rotatePiece();
   }
   
   int[] getColor() {

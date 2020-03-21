@@ -1,8 +1,13 @@
 // Coordeanadas 2D
-static public class Coord {
+public class Coord {
     
     public int x;
     public int y;
+    
+    public Coord() {
+      x = 0;
+      y = 0;
+    }
 
     public Coord(int x, int y) {
         this.x = x;
@@ -24,11 +29,9 @@ static public class Coord {
       y += a.y;
     }
     
-    static public Coord sum(Coord a, Coord b) {
-      return new Coord(a.x + b.x, a.y + b.y);
+    public Coord getNewSum(Coord a) {
+      
+      return new Coord(this.x + a.x, this.y + a.y);
     }
     
-    public Coord subs(Coord a, Coord b) {
-      return new Coord(a.x - b.x, a.y - b.y);
-    }
 }

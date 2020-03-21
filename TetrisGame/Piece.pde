@@ -1,8 +1,9 @@
+import java.util.*; 
 public abstract class Piece {
   
   protected Coord origin;
   protected int rotation;   // 0 -> 1 -> 2 -> 3 -> 0 -> ...
-  protected Coord[] portions =  new Coord[4];
+  protected Coord[] portions;
   
   abstract int[] getColor();
   abstract void rotatePiece();
@@ -19,10 +20,10 @@ public abstract class Piece {
   
   Coord[] getCoords() {
     
-    return new Coord[] { Coord.sum(origin, portions[0]),
-                         Coord.sum(origin, portions[1]),
-                         Coord.sum(origin, portions[2]),
-                         Coord.sum(origin, portions[3]) }; 
+    return new Coord[] { origin.getNewSum(portions[0]),
+                         origin.getNewSum(portions[1]),
+                         origin.getNewSum(portions[2]),
+                         origin.getNewSum(portions[3]) }; 
   }
   
 }

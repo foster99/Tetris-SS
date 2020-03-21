@@ -10,6 +10,8 @@ public class PieceJ extends Piece {
     super();
     origin = o;
     rotation = floor(random(0,4));
+    portions = new Coord[4];
+    rotatePiece();
   }
   
   int[] getColor() {

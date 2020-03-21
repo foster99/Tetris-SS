@@ -11,8 +11,9 @@ public class PieceO extends Piece {
     origin = o;
     rotation = 0;
     
+    portions = new Coord[4];
     
-    // Pieza L:    |0|1| | |
+    // Pieza O:    |0|1| | |
     //             |2|3| | |
     //             | | | | |
     //             | | | | |
