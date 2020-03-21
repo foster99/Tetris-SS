@@ -32,16 +32,16 @@ void draw() {
 void keyPressed() {
   switch(keyCode){
     case UP:
-      background(color(255, 0, 0));
+      B.move("UP");
       break;
     case RIGHT:
-      background(color(0, 255, 0));
+      B.move("RIGHT");
       break;
     case LEFT:
-      background(color(0, 0, 255));
+      B.move("LEFT");
       break;
     case DOWN:
-      background(color(255, 0, 255));
+      B.move("DOWN");
       break;
     default: 
       return;
