@@ -4,7 +4,7 @@
 // Funcion que se ejecuta al inicio una sola vez
 void setup() {
   
-  size(800,800);
+  size(600,600);
   background(color(500, 100, 100));
   
   int margin = 10;
@@ -21,9 +21,6 @@ void draw() {
   /* for all tablero -> tablero.show
     
   */
-  
-  
-  
 }
 
 // Funcion que se ejecuta cuando se presiona una tecla
