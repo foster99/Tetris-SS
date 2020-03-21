@@ -10,10 +10,10 @@ public abstract class Piece {
   
   void movePiece(String dir) {
     switch (dir) {
-      case "UP": origin.sum(0,-1); break;
-      case "DOWN": origin.sum(0,1); break;
-      case "LEFT": origin.sum(-1,0); break;
-      case "RIGHT": origin.sum(1,0); break;
+      //case "UP": origin.sum(-1,0); break;
+      case "DOWN": origin.sum(1,0); break;
+      case "LEFT": origin.sum(0,-1); break;
+      case "RIGHT": origin.sum(0,1); break;
       default: break;
     }
   }

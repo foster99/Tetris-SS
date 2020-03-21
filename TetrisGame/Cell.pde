@@ -1,5 +1,5 @@
 class Cell {
-  private static final int size= 40;
+  private static final int size= 30;
  
   private boolean Occupied;
   private Coord cord;
