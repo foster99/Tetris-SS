@@ -2,6 +2,7 @@
 Board B;
 Cell C;
 Coord aux;
+boolean gameRunning = true;
 // Funcion que se ejecuta al inicio una sola vez
 void setup() {
   size(600,600);
@@ -21,11 +22,13 @@ void setup() {
 // Funcion en bucle para pintar
 void draw() {
   // Crida a fer coses
-  B.game();
-  background(color(255, 255, 255));
-  C.show(aux);
-  aux.x += 1;
-  aux.y += 1;
+  if (gameRunning) {
+    gameRunning = B.game();
+    background(color(255, 255, 255));
+    C.show(aux);
+    aux.x += 1;
+    aux.y += 1;
+  }
 }
 
 // Funcion que se ejecuta cuando se presiona una tecla
