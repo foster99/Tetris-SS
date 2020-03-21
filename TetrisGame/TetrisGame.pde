@@ -3,6 +3,7 @@ Board B;
 Cell C;
 Coord aux;
 boolean gameRunning = true;
+int tick = 0;
 // Funcion que se ejecuta al inicio una sola vez
 void setup() {
   size(600,600);
@@ -21,11 +22,12 @@ void setup() {
 
 // Funcion en bucle para pintar
 void draw() {
+  ++tick;
   // Crida a fer coses
-  if (gameRunning) {
-    gameRunning = B.game();
+  if (gameRunning && tick%500 == 0) {
     background(color(255, 255, 255));
-    C.show(aux);
+    gameRunning = B.game();
+    //C.show(aux);
     aux.x += 1;
     aux.y += 1;
   }

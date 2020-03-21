@@ -2,11 +2,12 @@ import java.util.*;
 
 class Board {
   public Board(int x, int y) {
+    cells = new Cell[altura][anchura];
     position = new Coord(x,y);
     score = 0;
     lines = 0;
     for (int i = 0; i < altura; ++i) {
-      for (int j = 0; j < anchura; ++j) cells[i][j] = new Cell(i,j);
+      for (int j = 0; j < anchura; ++j) cells[i][j] = new Cell(j,i);
     }
     current_piece = generatePiece();
     next_piece = generatePiece();
@@ -62,6 +63,7 @@ class Board {
   }
   
   public boolean game() {
+    current_piece.movePiece("DOWN");
     Coord[] positions = current_piece.getCoords();
     int[] colors = current_piece.getColor();
     if (landed(positions)) {
@@ -89,8 +91,8 @@ class Board {
  
   private boolean landed(Coord[] positions) {
     for (int i = 0; i < 4; ++i) {
-      if (positions[i].y-1 == altura-1) return true;
-      else if (cells[positions[i].x][positions[i].y-1].isOccupied()) return true;
+      if (positions[i].y+1 == altura-1) return true;
+      else if (cells[positions[i].x][positions[i].y+1].isOccupied()) return true;
     }
     return false;
   }
@@ -119,7 +121,7 @@ class Board {
   }
   
   private void show() {
-    for (int i = 0; i < altura; ++i) {
+    for (int i = 4; i < altura; ++i) {
        for (int j = 0; j < anchura; ++j) {
          cells[i][j].show(position);
        }
@@ -144,12 +146,12 @@ class Board {
   
   //Position of the board (relative to the viewport)
   private Coord position;
-  //Matrix of the cells of the board
-  private Cell[][] cells = new Cell[altura][anchura];
   //altura of the board
   private static final int anchura = 10;
   //Length of the board, the first 4 rows are reserved.
-  private static final int altura = 20+4; 
+  private static final int altura = 20+4;
+  //Matrix of the cells of the board
+  private Cell[][] cells;
   //Points obtained in the board
   private int score;
   //Lines cleared in the board

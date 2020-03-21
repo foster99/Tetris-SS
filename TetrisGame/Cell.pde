@@ -48,7 +48,7 @@ class Cell {
   
   void show(Coord C) {
     fill(color(col[0],col[1],col[2]));
-    rect(cord.x+C.x,cord.y+C.y,size,size);
+    rect(cord.x*20+C.x,cord.y*20+C.y,size,size);
   }
   
 }
