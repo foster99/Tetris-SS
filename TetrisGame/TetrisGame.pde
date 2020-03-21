@@ -24,9 +24,6 @@ void draw() {
   /* for all tablero -> tablero.show
     
   */
-  
-  
-  
 }
 
 // Funcion que se ejecuta cuando se presiona una tecla
