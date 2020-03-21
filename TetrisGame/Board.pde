@@ -5,40 +5,38 @@ class Board {
     position = new Coord(x,y);
     score = 0;
     lines = 0;
-    highestOccupied = length-1;
-    for (int i = 0; i < length; ++i) {
-      for (int j = 0; j < width; ++j) cells[i][j] = new Cell(i,j);
+    for (int i = 0; i < altura; ++i) {
+      for (int j = 0; j < anchura; ++j) cells[i][j] = new Cell(i,j);
     }
     current_piece = generatePiece();
     next_piece = generatePiece();
   }
   
   private Piece generatePiece() {
-    Coord o = new Coord(width/2,4);
+    Coord o = new Coord(anchura/2,4);
     Piece p;
     int randomNum = floor(random(0,7));
-
     switch (randomNum) {
       case 0:
         p = new PieceL(o);
         break;
       case 1:
-        p = new PieceO(o);
+        p = new PieceJ(o);
         break;
       case 2:
-        p = new PieceT(o);
+        p = new PieceO(o);
         break;
       case 3:
-        p = new PieceL(o);
+        p = new PieceS(o);
         break;
       case 4:
-        p = new PieceL(o);
+        p = new PieceZ(o);
         break;
       case 5:
-        p = new PieceL(o);
+        p = new PieceT(o);
         break;
       case 6:
-        p = new PieceL(o);
+        p = new PieceI(o);
         break;
       default:
         throw new java.lang.IllegalArgumentException();
@@ -53,8 +51,8 @@ class Board {
   
   /*Given a cell (x,y), check if it is occupied*/
   public boolean isOccupied(int x, int y) {
-    if (x < 0 || x >= width) throw new java.lang.IllegalArgumentException();
-    else if (y < 0 || y >= length) throw new java.lang.IllegalArgumentException();
+    if (x < 0 || x >= anchura) throw new java.lang.IllegalArgumentException();
+    else if (y < 0 || y >= altura) throw new java.lang.IllegalArgumentException();
     return cells[x][y].isOccupied();
   }
   
@@ -66,7 +64,6 @@ class Board {
     /*Obtain current piece position array 4 positions
       Check if current piece lands on an occupied cell
       If true 
-        updateHighestOccupied if necessary
         occupieCells
         If line completed
           Calculate score, update lines cleared and clear lines
@@ -78,12 +75,28 @@ class Board {
         show()
         unoccupieCells
     */
+    Coord[] positions = current_piece.getCoords();
+    int[] colors = current_piece.getColor();
+    if (landed(positions)) {
+      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
+      int full = fullRows();
+      calculateScore(full);
+    }
+    else {
+      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].setOccupied(colors[0],colors[1],colors[2]);
+      show();
+      for (int i = 0; i < 4; ++i) cells[positions[i].x][positions[i].y].clearOccupied();
+    }
     
   }
   
+  private void calculateScore(int full) {
+    score++;
+  }
+ 
   private boolean landed(Coord[] positions) {
     for (int i = 0; i < 4; ++i) {
-      if (positions[i].y-1 == length-1) return true;
+      if (positions[i].y-1 == altura-1) return true;
       else if (cells[positions[i].x][positions[i].y-1].isOccupied()) return true;
     }
     return false;
@@ -91,32 +104,30 @@ class Board {
   
   private int fullRows() {
     int full = 0;
-    for (int i = highestOccupied; i >= 0; --i) {
+    for (int i = 4; i < altura; --i) {
       boolean occupied = true;
-      for (int j = 0; j < width && occupied; ++j) {
+      for (int j = 0; j < anchura && occupied; ++j) {
         if (!cells[i][j].isOccupied()) occupied = false;
       }
       if (occupied == true) {
         ++full;
         ++lines;
-        for (int j = 0; j < width; ++j) cells[i][j].clearOccupied();
+        for (int j = 0; j < anchura; ++j) cells[i][j].clearOccupied();
         //Push down all the upper cells
-        for (int ii = i; ii > highestOccupied; --ii) {
-          for (int j = 0; j < width; ++j) {
-            //cells[ii][j].replace(cells[ii-1][j]);
-            //cells[ii][j] = cells[ii+1][j];
-            //cell copy
+        for (int ii = i; ii > 0; --ii) {
+          for (int j = 0; j < anchura; ++j) {
+            cells[ii][j].replace(cells[ii-1][j]);
           }
         }
-        for (int j = 0; j < width; ++j) cells[highestOccupied][j].clearOccupied();
+        for (int j = 0; j < anchura; ++j) cells[0][j].clearOccupied();
       }
     }
     return full;
   }
   
   private void show() {
-    for (int i = 0; i < length; ++i) {
-       for (int j = 0; j < length; ++j) {
+    for (int i = 0; i < altura; ++i) {
+       for (int j = 0; j < altura; ++j) {
          cells[i][j].show(position);
        }
     }
@@ -141,11 +152,11 @@ class Board {
   //Position of the board (relative to the viewport)
   private Coord position;
   //Matrix of the cells of the board
-  private Cell[][] cells = new Cell[length][width];
-  //Width of the board
-  private static final int width = 10;
+  private Cell[][] cells = new Cell[altura][anchura];
+  //altura of the board
+  private static final int anchura = 10;
   //Length of the board, the first 4 rows are reserved.
-  private static final int length = 20+4; 
+  private static final int altura = 20+4; 
   //Points obtained in the board
   private int score;
   //Lines cleared in the board
@@ -154,5 +165,4 @@ class Board {
   private Piece current_piece;
   //Next piece in the game
   private Piece next_piece;
-  private int highestOccupied;
 }
