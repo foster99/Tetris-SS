@@ -5,26 +5,50 @@ class Board {
     lines = 0;
     for (int i = 0; i < length; ++i) {
       //Create cells
-      /*for (int j = 0; j < width; ++j) cells[i][j] = new Cell(i,j);*/
+      for (int j = 0; j < width; ++j) cells[i][j] = new Cell(i,j);
     }
     //Generate first pieces
-    /*current_piece = new Piece();
-    next_piece = new Piece();*/
+    /*current_piece = genPiece();
+    next_piece = genPiece();*/
   }
   
   public void genNextPiece() {
     current_piece = next_piece;
     //Generate new next piece
-    /*next_piece = new Piece();*/
+    /*next_piece = genPiece();*/
+  }
+  
+  /*Given a cell (x,y), check if it is occupied*/
+  public boolean isOccupied(int x, int y) {
+    if (x < 0 || x >= width) throw new java.lang.IllegalArgumentException();
+    else if (y < 0 || y >= length) throw new java.lang.IllegalArgumentException();
+    return cells[x][y].isOccupied();
   }
   
   public void show() {
     for (int i = 0; i < length; ++i) {
        for (int j = 0; j < length; ++j) {
-         //Show cells
+         /*cells[i][j].show(position);*/
        }
     }
   }
+  
+  public int getScore() {
+    return score;
+  }
+  
+  public int getLines() {
+    return lines;
+  }
+  
+  public Piece getCurrentPiece() {
+    return current_piece;
+  }
+  
+  public Piece getNextPiece() {
+    return next_piece;
+  }
+  
   //Position of the board (relative to the viewport)
   private Coord position;
   //Matrix of the cells of the board
