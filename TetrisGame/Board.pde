@@ -1,3 +1,5 @@
+import java.util.*; 
+
 class Board {
   public Board(int x, int y) {
     position = new Coord(x,y);
@@ -26,9 +28,19 @@ class Board {
   }
   
   public void show() {
+    /*Obtain current piece position
+      Check if current piece lands on an occupied cell
+      If true 
+        occupieCells
+        If line completed
+          Calculate score, update lines cleared and clear lines
+        If 4 first rows are occupied:
+          gameOver();
+      
+    */
     for (int i = 0; i < length; ++i) {
        for (int j = 0; j < length; ++j) {
-         /*cells[i][j].show(position);*/
+         cells[i][j].show(position);
        }
     }
   }
