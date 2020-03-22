@@ -1,24 +1,52 @@
 import java.util.*; 
 public abstract class Piece {
   
+  
+  protected int rotation;
   protected Coord origin;
-  protected int rotation;   // 0 -> 1 -> 2 -> 3 -> 0 -> ...
   protected Coord[] portions;
+  
+  protected int rotation_backup;
+  protected Coord origin_backup;
+  protected Coord[] portions_backup;
   
   abstract int[] getColor();
   abstract void rotatePiece();
   
-  void movePiece(String dir, int maxi, int maxj) {
+  private boolean init = true;
+  
+  void rollback() {
+    
+    rotation = rotation_backup;
+    origin = origin_backup.clone();
+    for (int i = 0; i < 4; ++i)
+      portions[i] = portions_backup[i].clone();
+  }
+  
+  void backup() {
+    if (init) { // primera iteracion no se hace backup
+      init = false;
+      return;
+    }
+    rotation_backup = rotation;
+    origin_backup = origin.clone();
+    for (int i = 0; i < 4; ++i)
+      portions_backup[i] = portions[i].clone();
+  }
+  
+  void movePiece(String dir, int anchura, int altura) {
+    
+    backup();
     
     switch (dir) {
       case "DOWN":
-        if (origin.j < maxj) origin.sum(1,0);
+        origin.sum(1,0);
         break;
       case "LEFT":
-        if (origin.i > 0) origin.sum(0,-1);
+        origin.sum(0,-1);
         break;
       case "RIGHT":
-        if (origin.i < maxi) origin.sum(0,1);
+        origin.sum(0,1);
         break;
       default: break;
     }

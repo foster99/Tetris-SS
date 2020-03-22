@@ -53,25 +53,21 @@ class Board {
     next_piece = generatePiece();
   }
   
-  
-/*  // Given a cell (x,y), check if it is occupied
-  public boolean isOccupied(int i, int j) {
+  public boolean legal(Coord[] positions) {
     
-    if (j < 0 || j >= anchura)
-      throw new java.lang.IllegalArgumentException();
-    else if (i < 0 || i >= altura)
-      throw new java.lang.IllegalArgumentException();
-    
-    return cells[i][j].isOccupied();
+    for (Coord pos : positions) {
+      if (pos.i >= altura || pos.i < 0 || pos.j >= anchura || pos.j < 0) return false;
+      else if (cells[pos.i][pos.j].isOccupied()) return false;
+    }
+    return true;
   }
-*/
   
   public void move(String direction) {
     
-    if (direction == "UP")
-      current_piece.rotatePiece();
-      
-    current_piece.movePiece(direction, anchura, altura);
+    if (direction == "UP") current_piece.rotatePiece();
+    else current_piece.movePiece(direction, anchura, altura);
+    
+    if (!legal(current_piece.getCoords())) current_piece.rollback();
   }
   
   public boolean game() {
@@ -109,20 +105,18 @@ class Board {
     } else {
       
       // Poner como ocupado las posiciones de la current_piece,
-      for (int i = 0; i < 4; ++i) {
-        aux = positions[i];
-        if (aux.i < altura && aux.j < anchura) 
-          cells[aux.i][aux.j].setOccupied(colors[0],colors[1],colors[2]);
+      for (Coord pos : positions)
+        if (pos.i < altura && pos.j < anchura) 
+          cells[pos.i][pos.j].setOccupied(colors[0],colors[1],colors[2]);
         else
           println("LA PIEZA OCUPA UNA POSICION INVALIDA");
-      }
       
       show();
       
       // Quitar de ocupadas todas las piezas (se van a mover)
       for (Coord pos : positions)
+        if (pos.i < altura && pos.j < anchura) 
           cells[pos.i][pos.j].clearOccupied();
-      
     }
     
     return true;
@@ -135,7 +129,11 @@ class Board {
   private boolean landed(Coord[] positions) {
     
     for (Coord pos : positions)
-      if (pos.i == altura - 1 || pos.i + 1 < altura && cells[pos.i + 1][pos.j].isOccupied())
+      if (pos.i == altura - 1 ||
+          pos.i + 1 < altura &&
+          pos.j > 0 &&
+          pos.j < anchura &&
+          cells[pos.i + 1][pos.j].isOccupied())
         return true;
     
     return false;

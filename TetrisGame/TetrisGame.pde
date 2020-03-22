@@ -1,7 +1,7 @@
 
 Board B;
 boolean gameRunning = true;
-int tick = 0;
+double tick = 0;
 
 void resetBackground() {
   background(color(255, 255, 255));
@@ -12,7 +12,7 @@ void setup() {
   
   size(400,800);
   resetBackground();
-  B= new Board(0,0);
+  B= new Board(10,10);
   
 }
 
@@ -21,8 +21,8 @@ void draw() {
    
   if (gameRunning) {
     
-    if (++tick%60 == 0)
-      B.current_piece.movePiece("DOWN", Board.anchura, Board.altura);
+    if (++tick%20 == 0)
+      B.move("DOWN");
     
     resetBackground();
     gameRunning = B.game();

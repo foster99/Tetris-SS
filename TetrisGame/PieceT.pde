@@ -9,8 +9,10 @@ public class PieceT extends Piece {
   PieceT(Coord o) {
     super();
     origin = o;
+    origin_backup = origin.clone();
     rotation = floor(random(0,4));
     portions = new Coord[4];
+    portions_backup = new Coord[4];
     rotatePiece();
   }
   
@@ -25,6 +27,7 @@ public class PieceT extends Piece {
   //     | | | | |     | |2| | |     | | | | |     |2| | | |
   //     | | | | |     | | | | |     | | | | |     | | | | |
 
+    backup();
     rotation = (++rotation)%4;
     switch (rotation) {
       case 0:
